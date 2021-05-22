@@ -1,6 +1,6 @@
 # Py4web SSO app
 
-A first attempt at a [Py4web](https://py4web.com/) Single Sign On (SSO) app which allows multiple applications hostted on the same server to use a single instance of the standard Py4web Auth functionalitly without the need for each application to have its own auth db.
+A first attempt at a [Py4web](https://py4web.com/) Single Sign On (SSO) app which allows multiple applications hosted on the same server to use a single instance of the standard Py4web Auth functionalitly in a seperate app without the need for each application to have its own auth database.
 
 The intention is to extend the functionality to include remote hosting of the SSO server.
 
@@ -85,3 +85,5 @@ This project is licensed under the MIT License
 ## Acknowledgments
 
 * Hat tip to the Py4web team and Andrew Gavgavian for great work on the py4web-blog (from which I borowed the login and profile layouts albeit converting them to Bulma from bootstrap)
+
+### All comments, suggestions and crticisms gratefully accepted and please feel free to contribute and colloborate
