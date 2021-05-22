@@ -1,0 +1,15 @@
+[[extend 'layout_app.html']]
+[[block page_menu_items]]
+  [[for item in menu_items:]]
+	<div class="navbar-item">
+	  <div class="buttons">
+		<a class="button is-small is-primary is-tab" href="[[=item['goto'] ]]">[[=item["name"] ]]</a>
+	  </div>
+	</div>  
+  [[pass]]	
+[[end]]
+<div class="columns">
+  <div class="column subtitle has-text-centered">
+    [[=message]]
+  </div>
+</div>

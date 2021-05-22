@@ -1,0 +1,12 @@
+[[extend 'layout.html']]
+[[block page_left_menu]]
+[[for client in other_clients:]]
+<a class="navbar-item " href="[[=client['url'] ]]">
+  <span class="icon has-text-primary"><i class="fas fa-tachometer-alt"></i></span> &nbsp;[[=client["client"] ]]</a>
+[[pass]]	
+[[end]]
+<div class="section">
+  <div class="vars">
+	  [[=message]]
+  </div>
+</div>

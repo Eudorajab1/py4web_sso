@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="[[=URL('static')]]/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAAQEAAAEAIAAwAAAAFgAAACgAAAABAAAAAgAAAAEAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAA=="/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+  
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+    <script src="js/utils.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <style>.py4web-validation-error{margin-top:-16px; font-size:0.8em;color:red}</style>
+    
+    [[block page_head]]<!-- individual pages can customize header here -->[[end]]
+  </head>
+  <body>    
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="../index">
+          <span class="has-text-primary"><strong><i class="fa fa-home has-text-primary"></i> Py4web </strong></span><strong>&nbsp;SSO Server</strong>
+        </a>
+	    	<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="my-navbar">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="my-navbar" class="navbar-menu">
+        <div class="navbar-start">
+          [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
+        </div>
+        <div id="left-navbar" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              [[if globals().get('user'):]]
+                <a class="navbar-item">
+                [[=globals().get('user',{}).get('email')]]
+                </a>
+              <div class="buttons">
+              <a class="button is-small is-primary" href="[[=URL('auth/logout')]]">Sign out</a>
+              [[else:]]
+              <a class="button is-small is-primary" href="[[=URL('auth/register')]]">Sign up</a>
+              <a class="button is-small is-info" href="[[=URL('auth/login')]]">Sign in</a>
+              [[pass]]
+              </div>
+           </div>
+          </div>
+        </div>
+      </div>  
+    </nav>
+    [[if globals().get('flash'):]]
+    <div id="flash" class="notification is-primary has-text-centered">
+      <button onclick="jQuery('#flash').hide();"class="delete" aria-label="delete"></button>
+      <flash-alerts data-alert="[[=globals().get('flash','')]]"></flash-alerts>
+    </div>
+    [[pass]]    
+    <section class="box">
+      [[include]]
+      <div class="sidebar">
+        [[block mysidebar]]
+        [[end]]
+      </div>
+    <!-- end of HTML inserted by extending template -->
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          Powered By <strong>Py4web</strong> <a href="https://py4web.com"></a>
+        </p>
+      </div>
+    </footer>
+    
+  </body>
+    <!-- You've gotta have utils.js -->
+    <script src="js/utils.js"></script>
+    
+    [[block page_scripts]]<!-- individual pages can add scripts here -->[[end]]
+</html>
+<script>
+$(document).ready(function() {
+
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+
+  });
+});
+</script>

@@ -1,0 +1,25 @@
+[[extend "layout_app.html"]]
+[[block content]]
+<div class="column is-6 is-offset-one-quarter">
+<div class="card">
+<div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-96x96">
+          <img class=" is-rounded" src="[[=icon]]" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-3">[[=globals().get('user').get('username')]]</p>
+        <p class="text-secondary">[[=globals().get('user').get('email')]]</p>
+      </div>
+    </div>
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+    </fieldset>
+    [[=aform]]
+</div>    
+</div>
+
+[[end]]
+

@@ -1,0 +1,87 @@
+[[extend 'layout_app.html']]
+[[block page_menu_items]]
+	  [[for item in menu_items:]]
+	    <div class="navbar-item">
+		  <div class="buttons">
+			<a class="button is-small is-primary is-tab" href="[[=item['goto'] ]]">[[=item["name"] ]]</a>
+	      </div>
+		</div>  
+	  [[pass]]	
+[[end]]
+
+<div id="show_form">
+  <a onclick="jQuery('#form').slideToggle();jQuery('#clients').slideToggle();"> 
+    <button class="button is-outline-info is-small">
+      <i class="fa fa-list text-info"></i>
+        &nbsp List/Add
+    </button>
+  </a>
+  <div class="columns is-centered">
+    <div class="column is-6">
+      <div id="form" class="box">
+      [[=form]]
+      </div>
+    </div>
+  </div>
+</div>
+<div id="clients" class="card">
+  <div class="card-header subtitle has-text-centered">
+    Registered Clients
+  </div>  
+  <div class="card-body">
+    <table id="registered_clients" class="table is-bordered is-striped is-narrow" style="width:100%" >
+      <thead>
+        <tr>
+          [[for header in headers:]]
+            <th>[[=header]]</th>
+          [[pass]]    
+        </tr>
+      </thead>
+      <tbody>
+        [[for client in clients:]]
+        <tr>
+          <td>[[=client.id]]</td>
+          <td>[[=client.client_name]]</td>
+          <td>[[=client.client_url]]</td>
+          <td>[[=client.client_secret]]</td>
+          <td>[[=client.is_active]]</td>
+          <td class="field is-grouped">
+            [[if not client.is_active:]]
+              <p class="control" >
+                <a href="[[=client.client_url]]" class="button is-outlined is-success is-small" disabled>
+                <i class="fas fa-arrow-right text-success"></i>&nbsp Goto
+                </a>
+              </p>
+            [[else:]]
+            <p class="control" >
+              <a href="[[=client.client_url]]" class="button is-outlined is-success is-small">
+              <i class="fas fa-arrow-right text-success"></i>&nbsp Goto
+              </a>
+            </p>  
+            [[pass]]
+            <p class="control">
+              <a href="[[=URL('edit_client',client['id']) ]]" class="button is-outlined is-primary is-small">
+                <i class="fa fa-edit text-info"></i>&nbsp Edit</button>
+              </a>
+            </p>
+            <p class="control">
+              <a href="[[=URL('remove_registered_client', client['id']) ]]" class="button is-outlined is-danger is-small">
+              <i class="fas fa-trash text-danger"></i>&nbsp Delete
+              </a>
+            </p>
+          </td>
+        </tr>
+        [[pass]]
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('#registered_clients').DataTable({
+        "scrollX": true
+    });
+    [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]    
+    });
+</script>

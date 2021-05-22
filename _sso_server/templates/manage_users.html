@@ -1,0 +1,77 @@
+[[extend 'layout_app.html']]
+[[block page_menu_items]]
+	  [[for item in menu_items:]]
+	    <div class="navbar-item">
+		  <div class="buttons">
+			<a class="button is-small is-primary is-tab" href="[[=item['goto'] ]]">[[=item["name"] ]]</a>
+	      </div>
+		</div>  
+	  [[pass]]	
+[[end]]
+
+<div id="show_form">
+    <a onclick="jQuery('#form').slideToggle();jQuery('#users').slideToggle();"> 
+        
+        <button class="button is-outlined is-info is-small">
+            <i class="fa fa-list text-info"></i>
+            &nbsp List/Add
+        </button>
+    </a>
+    <div class="columns is-centered">
+        <div class="column is-6">
+          <div id="form" class="box">
+            [[=form]]
+          </div>
+        </div>
+    </div>
+ </div>   
+<div id="users" class="card">
+    <div class="card-header subtitle has-text-centered">
+        Users For Registered Clients
+    </div>  
+    <div class="card-body">  
+      <table id="registered_users"  class="table is-bordered is-striped is-narrow" style="width:100%">
+            <thead>
+                <tr>
+                    [[for header in headers:]]
+                        <th>[[=header]]</th>
+                    [[pass]]    
+                </tr>
+            </thead>
+            <tbody>
+                [[for user in users:]]
+                <tr>
+                    <td>[[=user['id'] ]]</td>
+                    <td>[[=user['email'] ]]</td>
+                    <td>[[=user['client'] ]]</td>
+                    <td>[[=user['role'] ]]</td>
+                    <td>[[=user['status'] ]]</td>
+                    <td class="field is-grouped">
+                        <p class="control">
+                            <a href="[[=URL('manage_users',user['id']) ]]" class="button is-outlined is-primary is-small">
+                                <i class="fa fa-edit text-info"></i>&nbsp Edit</button>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a href="[[=URL('remove_client_user', user['id']) ]]" class="button is-outlined is-danger is-small">
+                            <i class="fas fa-trash text-danger"></i>&nbsp Delete
+                            </a>
+                        </p>
+                    </td>
+                </tr>
+                [[pass]]
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+    $('#registered_users').DataTable({
+        "scrollX": true
+    });
+    [[if form and not form.errors:]]jQuery('#form').hide();[[pass]]    
+    [[if edit == True:]]jQuery('#form').slideToggle();jQuery('#users').slideToggle();[[pass]]
+    });
+</script>
